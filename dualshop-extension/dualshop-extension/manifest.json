@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "湊單搜尋連線",
+  "version": "1.0.0",
+  "description": "讓「湊單搜尋」網頁可以自動到蝦皮搜尋、捲動、翻頁並取回商品資料。",
+  "permissions": ["scripting", "tabs"],
+  "host_permissions": [ "https://anna0212anna0212.github.io/Shopping/*" ],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": [ "https://anna0212anna0212.github.io/Shopping/*", "http://localhost/*", "http://127.0.0.1/*" ],
+      "js": ["content-site.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
