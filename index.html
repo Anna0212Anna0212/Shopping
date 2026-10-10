@@ -3,55 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>湊單搜尋｜找同時賣兩樣商品的賣場</title>
+<title>湊單搜尋｜找同時賣多樣商品的賣場</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --paper:#eef1f5; --card:#fff; --ink:#1b2330; --mute:#5f6b7a; --line:#d3dae3;
-  --link:#2457d6; --tape:#ffc933; --ok:#1a8a5a; --warn:#b4540a;
-  color-scheme:light;
-}
+:root{--paper:#eef1f5;--card:#fff;--ink:#1b2330;--mute:#5f6b7a;--line:#d3dae3;--link:#2457d6;--tape:#ffc933;--ok:#1a8a5a;--warn:#b4540a;color-scheme:light}
 *{box-sizing:border-box}
-html{scroll-padding-top:12px}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.6 "Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif}
 a{color:var(--link)}
-button,input,select,textarea{font:inherit;color:inherit}
-.wrap{max-width:1000px;margin:0 auto;padding:28px 18px 80px}
-h1{font-size:34px;font-weight:900;margin:0 0 4px;letter-spacing:.02em}
-.lead{margin:0 0 24px;color:var(--mute);max-width:36em}
-h2{font-size:17px;font-weight:700;margin:32px 0 10px}
-.slots{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.slot-in{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
-.slot-in label{display:block;font-weight:700;margin-bottom:6px}
-.slot-in input[type=text]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff}
-.slot-in input:focus,button:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #7fa3ff;outline-offset:2px}
-.slot-meta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-top:8px;font-size:13px;color:var(--mute)}
-.btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:13px}
-.btn:hover{border-color:#9aa7b8}
+button,input,select{font:inherit;color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:28px 18px 80px}
+h1{font-size:34px;font-weight:900;margin:0 0 4px}
+.lead{margin:0 0 22px;color:var(--mute)}
+h2{font-size:17px;font-weight:700;margin:30px 0 10px}
+:focus-visible{outline:3px solid #7fa3ff;outline-offset:2px}
+.btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 14px;cursor:pointer}
+.btn:hover:not(:disabled){border-color:#8896a8}
+.btn:disabled{opacity:.45;cursor:not-allowed}
 .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
-.btn.link{border:0;background:none;color:var(--link);padding:0;text-decoration:underline}
-details.how{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:0 14px}
-details.how>summary{cursor:pointer;padding:12px 0;font-weight:700}
-details.how .body{padding:0 0 14px;color:var(--ink)}
-.how ol{padding-left:20px;margin:8px 0}
-.how li{margin:4px 0}
-.bm{display:inline-block;background:var(--tape);color:#1b2330;font-weight:700;text-decoration:none;padding:7px 14px;border-radius:6px;margin:4px 8px 4px 0;cursor:grab;border:1px dashed #b88c00}
-.note{font-size:13px;color:var(--mute)}
-.how textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:8px;padding:8px;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace}
-.row{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:8px 0}
-.row input[type=text],.row input[type=number],.row select{padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.btn.small{padding:3px 10px;font-size:13px}
+.linkbtn{border:0;background:none;color:var(--link);text-decoration:underline;cursor:pointer;padding:0;font-size:13px}
+.ext{border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:14px}
+.ext.ok{background:#e3f4ec;color:var(--ok)}
+.ext.no{background:#fff4d6;border:1px solid #e6c766;color:#5a4300}
+.ext ol{margin:6px 0 2px;padding-left:20px}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:center}
+.prod .n{font-weight:700;color:var(--mute);width:3.2em}
+.prod input[type=text]{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.prod .meta{grid-column:2/4;font-size:12.5px;color:var(--mute)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.actions label{font-size:14px}
+.actions select{padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:#fff}
+#status{margin-top:8px;font-size:14px;color:var(--mute);min-height:1.4em}
+#status.err{color:#b3261e}
+.filters{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 14px}
+.row{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin:6px 0}
+.row input[type=text],.row input[type=number],.row select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
 .row input[type=number]{width:96px}
-.filters{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
-.filters .row{margin:6px 0}
 .sum{margin:14px 0 8px;color:var(--mute)}
 .sum b{color:var(--ink)}
 
-.shop{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px 12px;margin:0 0 14px}
+.shop{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--line);border-radius:10px;padding:12px 16px;margin:0 0 14px}
+.shop.full{border-left-color:var(--tape)}
 .shop-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
 .shop-h .name{font-weight:700;font-size:16px}
-.tag{font-size:12px;border:1px solid var(--line);border-radius:4px;padding:0 6px;margin-left:6px;color:var(--mute)}
+.badge{font-size:12px;border-radius:4px;padding:1px 7px;margin-left:8px;background:#e4e9ef;color:var(--mute)}
+.shop.full .badge{background:var(--tape);color:#1b2330;font-weight:700}
 .total{text-align:right;line-height:1.2}
 .total b{font-size:28px;font-weight:900}
 .total small{display:block;color:var(--mute);font-size:12px}
@@ -60,333 +58,305 @@ details.how .body{padding:0 0 14px;color:var(--ink)}
 .bar.done i{background:var(--ok)}
 .barlabel{font-size:12.5px;color:var(--warn)}
 .barlabel.done{color:var(--ok)}
-.pair{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
-.pair::before{content:"";position:absolute;left:50%;top:26px;width:54px;height:20px;margin-left:-27px;background:var(--tape);opacity:.9;transform:rotate(-7deg);border-radius:2px;z-index:1;
-  background-image:repeating-linear-gradient(90deg,transparent 0 5px,rgba(0,0,0,.05) 5px 6px)}
-.side{min-width:0}
-.side-t{font-size:13px;color:var(--mute);margin-bottom:4px}
-.item{display:grid;grid-template-columns:72px 1fr;gap:10px;align-items:start}
-.item img,.item .noimg{width:72px;height:72px;object-fit:cover;border-radius:6px;background:#e4e9ef;border:1px solid var(--line)}
-.item .t{font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-decoration:none;color:var(--ink)}
+.line{border-top:1px solid var(--line);padding:10px 0 4px;margin-top:10px}
+.line:first-of-type{margin-top:8px}
+.lt{font-size:12.5px;color:var(--mute);margin-bottom:4px}
+.item{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:start}
+.item img,.item .noimg{width:76px;height:76px;object-fit:cover;border-radius:6px;background:#e4e9ef;border:1px solid var(--line)}
+.item .t{font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink);text-decoration:none}
 .item a.t:hover{text-decoration:underline}
-.item .p{font-weight:900;font-size:18px}
-.item .s{font-size:12px;color:var(--mute);margin-left:6px;font-weight:400}
-.cmp{margin-top:8px;font-size:13px}
+.item .p{font-weight:900;font-size:19px}
+.item .s{font-size:12px;color:var(--mute);margin-left:8px;font-weight:400}
+.missing{font-size:13.5px;color:var(--mute)}
+.cmp{margin-top:6px;font-size:13px}
 .cmp>summary{cursor:pointer;color:var(--link)}
-.list{margin-top:6px;border-top:1px solid var(--line)}
-.list .item{padding:8px 0;border-bottom:1px solid var(--line);grid-template-columns:52px 1fr auto}
-.list .item img,.list .item .noimg{width:52px;height:52px}
-.list .item .p{font-size:15px}
-.list .cheap{font-size:11px;background:#e3f4ec;color:var(--ok);border-radius:3px;padding:0 5px;margin-left:6px;font-weight:500}
+.list{margin-top:6px}
+.list .item{padding:8px 0;border-top:1px solid var(--line);grid-template-columns:56px 1fr auto;gap:10px}
+.list .item img,.list .item .noimg{width:56px;height:56px}
+.list .item .p{font-size:16px}
 .list .item.on{background:#fff8dc;margin:0 -6px;padding-left:6px;padding-right:6px}
-.partial{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:0 14px}
-.partial>summary{cursor:pointer;padding:12px 0;font-weight:700}
-.partial ul{list-style:none;margin:0;padding:0 0 10px}
-.partial li{padding:6px 0;border-top:1px solid var(--line);font-size:14px}
-.empty{background:var(--card);border:1px dashed #aab5c3;border-radius:10px;padding:22px;color:var(--mute)}
+.list .cheap{font-size:11px;background:#e3f4ec;color:var(--ok);border-radius:3px;padding:0 5px;margin-left:6px;font-weight:500}
+.list .btns{display:flex;flex-direction:column;gap:4px}
+.empty{background:var(--card);border:1px dashed #aab5c3;border-radius:10px;padding:20px;color:var(--mute)}
 .empty b{color:var(--ink)}
 footer{margin-top:40px;font-size:12.5px;color:var(--mute)}
-@media (max-width:700px){
-  .slots,.pair{grid-template-columns:1fr}
-  .pair::before{left:auto;right:12px;top:-6px;margin:0}
-  h1{font-size:28px}
-}
+@media (max-width:600px){h1{font-size:28px}.prod{grid-template-columns:1fr auto}.prod .n{display:none}.prod .meta{grid-column:1/3}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>湊單搜尋</h1>
-  <p class="lead">輸入你想買的兩樣商品，找出同一個賣場兩樣都有賣的店，併成一張訂單，只付一次運費。</p>
+  <p class="lead">輸入想買的商品，自動找出同一個賣場裡有賣的店，湊成一張訂單只付一次運費。</p>
 
-  <h2>1. 你想買哪兩樣？</h2>
-  <div class="slots">
-    <div class="slot-in">
-      <label for="labelA">商品 A</label>
-      <input type="text" id="labelA" placeholder="例：泡椒筍" autocomplete="off">
-      <div class="slot-meta"><span id="cntA">尚未匯入</span>
-        <a id="openA" href="#" target="_blank" rel="noopener">到蝦皮搜尋 A</a>
-        <button class="btn link" data-clear="A">清空</button></div>
-    </div>
-    <div class="slot-in">
-      <label for="labelB">商品 B</label>
-      <input type="text" id="labelB" placeholder="例：蜂蜜塊" autocomplete="off">
-      <div class="slot-meta"><span id="cntB">尚未匯入</span>
-        <a id="openB" href="#" target="_blank" rel="noopener">到蝦皮搜尋 B</a>
-        <button class="btn link" data-clear="B">清空</button></div>
-    </div>
+  <div id="ext"></div>
+
+  <h2>想買哪些商品？</h2>
+  <div id="prods"></div>
+  <div class="actions">
+    <button class="btn" id="addBtn">新增商品（最多 6 件）</button>
+    <label>每項搜尋
+      <select id="pages">
+        <option value="1">1 頁（約 60 件）</option>
+        <option value="2">2 頁（約 120 件）</option>
+        <option value="3">3 頁（約 180 件）</option>
+        <option value="5">5 頁（約 300 件）</option>
+        <option value="8">8 頁（約 480 件）</option>
+      </select></label>
+    <button class="btn primary" id="goBtn">開始搜尋</button>
+    <button class="btn" id="stopBtn" hidden>停止</button>
   </div>
+  <div id="status"></div>
 
-  <h2>2. 把搜尋結果帶進來</h2>
-  <details class="how" id="howBox" open>
-    <summary>擷取方式（不需要伺服器）</summary>
-    <div class="body">
-      <p class="note" style="margin-top:0">蝦皮不開放網頁直接查詢，所以由你的瀏覽器在蝦皮頁面上擷取，再傳到這個頁面比對。第一次請先把下面兩個黃色按鈕拖到書籤列。</p>
-      <div>
-        <a class="bm" id="bmA" href="#">擷取 → 商品 A</a>
-        <a class="bm" id="bmB" href="#">擷取 → 商品 B</a>
-      </div>
-      <ol>
-        <li>點上方「到蝦皮搜尋 A」，看到搜尋結果後<b>往下捲動幾次</b>，讓商品都載入。</li>
-        <li>點書籤列的「擷取 → 商品 A」，這個頁面會自動開啟並收到商品。</li>
-        <li>回蝦皮搜 B，點「擷取 → 商品 B」。想要更多賣場可換頁或換排序再擷取一次，資料會累加。</li>
-      </ol>
-      <p class="note">手機瀏覽器不方便使用書籤，建議用電腦操作。</p>
-
-      <details style="margin-top:10px">
-        <summary>進階：自動搜尋（需自備 Cloudflare Worker）</summary>
-        <div class="row">
-          <input type="text" id="worker" placeholder="https://xxx.workers.dev" style="min-width:260px">
-          <label>頁數 <input type="number" id="pages" min="1" max="5" value="2" style="width:64px"></label>
-          <button class="btn primary" id="autoBtn">自動搜尋 A 與 B</button>
-        </div>
-        <p class="note" id="autoMsg">部署方式見 README。蝦皮可能擋掉伺服器端請求，擋掉時請改用書籤擷取。</p>
-      </details>
-
-      <details style="margin-top:10px">
-        <summary>進階：貼上 JSON 匯入</summary>
-        <div class="row"><select id="pasteSlot"><option value="A">匯入到商品 A</option><option value="B">匯入到商品 B</option></select>
-          <button class="btn" id="pasteBtn">匯入</button></div>
-        <textarea id="pasteBox" placeholder='[{"platform":"shopee","shopId":"123","itemId":"456","title":"…","price":99,"img":"https://…","url":"https://shopee.tw/product/123/456"}]'></textarea>
-      </details>
-    </div>
-  </details>
-
-  <h2>3. 篩選與排序</h2>
+  <h2>篩選</h2>
   <div class="filters">
     <div class="row">
       <label>免運門檻 $<input type="number" id="thr" min="0" placeholder="例：199"></label>
-      <label>A 價格上限 $<input type="number" id="maxA" min="0"></label>
-      <label>B 價格上限 $<input type="number" id="maxB" min="0"></label>
+      <label>至少要有 <select id="min"></select></label>
+      <label>排序 <select id="sort">
+        <option value="total">合計最低</option>
+        <option value="gap">最接近免運門檻</option>
+        <option value="cnt">商品選擇最多</option>
+      </select></label>
     </div>
     <div class="row">
-      <label>排除關鍵字 <input type="text" id="excl" placeholder="例：禮盒 試吃（空白分隔）"></label>
-      <label><input type="checkbox" id="strict" checked> 商品標題必須含上方輸入的字</label>
-    </div>
-    <div class="row">
-      <label>排序
-        <select id="sort">
-          <option value="total">兩件合計最低</option>
-          <option value="gap">最接近免運門檻（剛好湊到）</option>
-          <option value="cnt">可選商品最多</option>
-        </select></label>
+      <label>排除字 <input type="text" id="excl" placeholder="例：禮盒 試吃（空白分隔）"></label>
+      <label><input type="checkbox" id="strict"> 商品標題必須包含我輸入的字</label>
     </div>
   </div>
 
   <div class="sum" id="sum"></div>
   <div id="results"></div>
-  <div id="partial"></div>
+  <div id="more"></div>
 
-  <footer>資料只存在你自己的瀏覽器（localStorage），不會上傳到任何伺服器。價格以蝦皮頁面為準，下單前請點進商品頁確認規格、數量與運費。</footer>
+  <footer>資料只存在你自己的瀏覽器，不會上傳。價格與庫存以蝦皮商品頁為準，下單前請點進商品頁確認規格、數量與運費。</footer>
 </div>
 
 <script>
 (function(){
 'use strict';
-const KEY='dualshop.v1';
+const KEY='dualshop.v2',MAX=6;
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
+const uid=()=>'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
 
-let S={A:{label:'',items:[]},B:{label:'',items:[]},opt:{thr:'',maxA:'',maxB:'',excl:'',strict:true,sort:'total',worker:'',pages:2}};
-try{const r=JSON.parse(localStorage.getItem(KEY)||'null');if(r&&r.A&&r.B){S=Object.assign(S,r);S.opt=Object.assign({thr:'',maxA:'',maxB:'',excl:'',strict:true,sort:'total',worker:'',pages:2},r.opt||{})}}catch(e){}
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const DEF=()=>({products:[{id:uid(),label:'',items:[]},{id:uid(),label:'',items:[]}],
+  opt:{thr:'',excl:'',strict:false,sort:'total',min:'all',pages:'3'},hidden:[]});
+let S=DEF();
+try{const r=JSON.parse(localStorage.getItem(KEY)||'null');
+  if(r&&Array.isArray(r.products)&&r.products.length){S=Object.assign(DEF(),r);S.opt=Object.assign(DEF().opt,r.opt||{})}}catch(e){}
+let saveT;
+const save=()=>{clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},200)};
 
-const SEL={};      // 每個賣場目前選中的商品
-const OPEN=new Set(); // 展開比價的區塊
+const SEL={},OPEN=new Set();
+let LIMIT=30,EXT=false,RUNNING=false;
+
+/* ---------- 與擴充功能溝通 ---------- */
+const post=m=>window.postMessage(Object.assign({src:'dualshop-page'},m),'*');
+window.addEventListener('message',e=>{
+  if(e.source!==window)return;
+  const d=e.data;if(!d||d.src!=='dualshop-ext')return;
+  if(d.type==='pong'){EXT=true;renderExt()}
+  else if(d.type==='progress')setStatus(`正在搜尋「${d.label}」第 ${d.page}/${d.pages} 頁，這項已取得 ${d.count} 件…`);
+  else if(d.type==='items')addItems(d.id,d.items);
+  else if(d.type==='slotDone'){const p=prod(d.id);setStatus(`「${p?p.label:''}」完成，共 ${d.count} 件`)}
+  else if(d.type==='done'){RUNNING=false;setStatus('全部搜尋完成。');syncBtns()}
+  else if(d.type==='error'){RUNNING=false;setStatus(d.message,true);syncBtns()}
+});
+let tries=0;(function ping(){post({type:'ping'});if(!EXT&&tries++<8)setTimeout(ping,400)})();
+
+function setStatus(t,err){const s=$('#status');s.textContent=t;s.className=err?'err':''}
+function renderExt(){
+  $('#ext').innerHTML=EXT?'<div class="ext ok">已連線到「湊單搜尋連線」擴充功能，可以自動搜尋。</div>':
+  `<div class="ext no"><b>需要先安裝一次擴充功能</b>（Chrome 或 Edge，電腦版），才能自動搜尋蝦皮：
+  <ol><li><a href="dualshop-extension.zip" download>下載擴充功能 zip</a> 並解壓縮。</li>
+  <li>網址列輸入 <code>chrome://extensions</code>（Edge 為 <code>edge://extensions</code>），開啟右上角「開發人員模式」。</li>
+  <li>按「載入未封裝項目」，選擇解壓縮後的資料夾。</li>
+  <li>回到這個頁面按 F5 重新整理。</li></ol></div>`;
+  syncBtns();
+}
+function syncBtns(){
+  $('#goBtn').disabled=!EXT||RUNNING;
+  $('#stopBtn').hidden=!RUNNING;
+  $('#addBtn').disabled=S.products.length>=MAX;
+}
 
 /* ---------- 資料 ---------- */
+const prod=id=>S.products.find(p=>p.id===id);
 function cleanItem(x){
   if(!x||!/^\d+$/.test(String(x.shopId))||!/^\d+$/.test(String(x.itemId)))return null;
   const price=Number(x.price);if(!isFinite(price)||price<=0)return null;
-  const img=typeof x.img==='string'&&/^https:\/\//.test(x.img)?x.img:'';
-  return {platform:'shopee',shopId:String(x.shopId),itemId:String(x.itemId),
-    title:String(x.title||'').slice(0,200),price,img,
+  return {shopId:String(x.shopId),itemId:String(x.itemId),title:String(x.title||'').slice(0,200),price,
+    img:typeof x.img==='string'&&/^https:\/\//.test(x.img)?x.img:'',
     url:'https://shopee.tw/product/'+x.shopId+'/'+x.itemId,sold:String(x.sold||'').slice(0,12)};
 }
-function addItems(slot,arr){
-  const m=new Map(S[slot].items.map(i=>[i.itemId,i]));let add=0;
-  (arr||[]).forEach(x=>{const c=cleanItem(x);if(c){if(!m.has(c.itemId))add++;m.set(c.itemId,c)}});
-  S[slot].items=[...m.values()];save();render();return add;
+let rT;const renderSoon=()=>{clearTimeout(rT);rT=setTimeout(render,150)};
+function addItems(id,arr){
+  const p=prod(id);if(!p)return;
+  const m=new Map(p.items.map(i=>[i.itemId,i]));
+  (arr||[]).forEach(x=>{const c=cleanItem(x);if(c)m.set(c.itemId,c)});
+  p.items=[...m.values()];save();renderSoon();
 }
 
-/* ---------- 書籤 ---------- */
-function bookmarklet(slot){
-  const site=location.origin+location.pathname;
-  const code=`(function(){var slot='${slot}',site='${site}',o=new URL(site).origin,m={},items=[];document.querySelectorAll('a[href]').forEach(function(a){var h=a.getAttribute('href')||'',r=h.match(/-i\\.(\\d+)\\.(\\d+)/)||h.match(/\\/product\\/(\\d+)\\/(\\d+)/);if(!r||m[r[2]])return;var t=(a.innerText||'').replace(/\\s+/g,' ');var p=t.match(/\\$\\s?([\\d,]+)/);if(!p)return;m[r[2]]=1;var im=a.querySelector('img'),sd=t.match(/已售出\\s?([\\d.,]+[萬千]?)/);items.push({platform:'shopee',shopId:r[1],itemId:r[2],title:(im&&im.alt)||t.slice(0,60),price:+p[1].replace(/,/g,''),img:im?(im.currentSrc||im.src):'',sold:sd?sd[1]:''})});if(!items.length){alert('這頁找不到蝦皮商品，請在蝦皮的搜尋結果頁使用');return}var w=window.open(site,'dualshop_site'),n=0,iv=setInterval(function(){try{w.postMessage({type:'dualshop-import',slot:slot,items:items},o)}catch(e){}if(++n>40)clearInterval(iv)},500);window.addEventListener('message',function(e){if(e.origin===o&&e.data==='dualshop-ack'){clearInterval(iv);alert('已傳送 '+items.length+' 件商品到湊單搜尋')}})})()`;
-  return 'javascript:'+encodeURIComponent(code);
+/* ---------- 商品輸入列 ---------- */
+function renderProds(){
+  $('#prods').innerHTML=S.products.map((p,i)=>`<div class="prod" data-id="${p.id}">
+    <span class="n">商品 ${i+1}</span>
+    <input type="text" value="${esc(p.label)}" placeholder="${['例：泡椒筍','例：蜂蜜塊','例：辣椒醬','例：沖泡飲品','例：魷魚絲','例：堅果'][i]||'輸入商品名稱'}" data-label aria-label="商品 ${i+1} 名稱">
+    ${S.products.length>1?`<button class="btn small" data-del="${p.id}" aria-label="移除商品 ${i+1}">移除</button>`:'<span></span>'}
+    <div class="meta" data-meta></div></div>`).join('');
+  syncBtns();updateMeta();
 }
-$('#bmA').href=bookmarklet('A');$('#bmB').href=bookmarklet('B');
-$('#bmA').addEventListener('click',e=>{e.preventDefault();alert('請把這個按鈕「拖曳」到瀏覽器的書籤列，之後在蝦皮搜尋結果頁點書籤使用。')});
-$('#bmB').addEventListener('click',e=>{e.preventDefault();alert('請把這個按鈕「拖曳」到瀏覽器的書籤列，之後在蝦皮搜尋結果頁點書籤使用。')});
-
-window.addEventListener('message',e=>{
-  const d=e.data;
-  if(!d||d.type!=='dualshop-import')return;
-  if(!/^https:\/\/([a-z0-9-]+\.)*shopee\.tw$/.test(e.origin))return;
-  if(d.slot!=='A'&&d.slot!=='B')return;
-  addItems(d.slot,d.items);
-  try{e.source.postMessage('dualshop-ack',e.origin)}catch(_){}
-});
-
-/* ---------- 比對 ---------- */
-function filterItems(slot){
-  const o=S.opt,max=Number(slot==='A'?o.maxA:o.maxB)||0;
-  const ex=(o.excl||'').toLowerCase().split(/\s+/).filter(Boolean);
-  const terms=o.strict?(S[slot].label||'').toLowerCase().split(/\s+/).filter(Boolean):[];
-  return S[slot].items.filter(i=>{
-    const t=i.title.toLowerCase();
-    if(max&&i.price>max)return false;
-    if(ex.some(w=>t.includes(w)))return false;
-    if(terms.length&&!terms.every(w=>t.includes(w)))return false;
-    return true;
+function updateMeta(){
+  document.querySelectorAll('.prod').forEach(el=>{
+    const p=prod(el.dataset.id);if(!p)return;
+    const shops=new Set(p.items.map(i=>i.shopId)).size;
+    el.querySelector('[data-meta]').textContent=p.items.length?`已取得 ${p.items.length} 件，分布在 ${shops} 個賣場`:'';
   });
 }
-function group(items){
-  const m=new Map();
-  items.forEach(i=>{if(!m.has(i.shopId))m.set(i.shopId,[]);m.get(i.shopId).push(i)});
-  m.forEach(l=>l.sort((a,b)=>a.price-b.price));
-  return m;
-}
-const pick=(list,id)=>list.find(x=>x.itemId===id)||list[0];
 
-/* ---------- 畫面 ---------- */
-function itemMini(it,withLink){
+/* ---------- 比對 ---------- */
+function compute(){
+  const P=S.products.filter(p=>p.label.trim());
+  const hid=new Set(S.hidden);
+  const ex=(S.opt.excl||'').toLowerCase().split(/\s+/).filter(Boolean);
+  const shops=new Map();
+  P.forEach((p,idx)=>{
+    const terms=S.opt.strict?p.label.toLowerCase().split(/\s+/).filter(Boolean):[];
+    p.items.forEach(i=>{
+      const t=i.title.toLowerCase();
+      if(hid.has(i.itemId)||ex.some(w=>t.includes(w))||!terms.every(w=>t.includes(w)))return;
+      if(!shops.has(i.shopId))shops.set(i.shopId,P.map(()=>[]));
+      shops.get(i.shopId)[idx].push(i);
+    });
+  });
+  shops.forEach(arr=>arr.forEach(l=>l.sort((a,b)=>a.price-b.price)));
+  return {P,shops};
+}
+const pickItem=(list,sid,pid)=>list.find(x=>x.itemId===(SEL[sid]||{})[pid])||list[0];
+
+function itemMini(it){
   const img=it.img?`<img src="${esc(it.img)}" alt="" loading="lazy" referrerpolicy="no-referrer">`:'<div class="noimg"></div>';
-  return `<div class="item">${img}<div>
-    <a class="t" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title||'（無標題）')}</a>
+  return `<div class="item">${img}<div><a class="t" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title||'（無標題）')}</a>
     <div><span class="p">${fmt(it.price)}</span>${it.sold?`<span class="s">已售出 ${esc(it.sold)}</span>`:''}</div></div></div>`;
 }
-function listRows(slot,key,list,selId){
+function listRows(sid,pid,list,selId){
   const min=list[0].price;
   return list.map(it=>{
     const img=it.img?`<img src="${esc(it.img)}" alt="" loading="lazy" referrerpolicy="no-referrer">`:'<div class="noimg"></div>';
     const on=it.itemId===selId;
-    return `<div class="item${on?' on':''}">${img}<div>
-      <a class="t" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title||'（無標題）')}</a>
-      <div><span class="p">${fmt(it.price)}</span>${it.price===min?'<span class="cheap">最低價</span>':''}${it.sold?`<span class="s">已售出 ${esc(it.sold)}</span>`:''}</div></div>
-      <button class="btn${on?' primary':''}" data-pick="${slot}" data-shop="${esc(key)}" data-item="${esc(it.itemId)}">${on?'已選用':'選用'}</button></div>`;
+    return `<div class="item${on?' on':''}">${img}<div><a class="t" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title||'（無標題）')}</a>
+      <div><span class="p">${fmt(it.price)}</span>${it.price===min?'<span class="cheap">最低</span>':''}${it.sold?`<span class="s">已售出 ${esc(it.sold)}</span>`:''}</div></div>
+      <div class="btns"><button class="btn small${on?' primary':''}" data-pick="${esc(it.itemId)}" data-shop="${esc(sid)}" data-pid="${esc(pid)}">${on?'已選用':'選用'}</button>
+      <button class="btn small" data-hide="${esc(it.itemId)}">不是這個</button></div></div>`;
   }).join('');
 }
-function shopCard(sid,la,lb){
-  const sel=SEL[sid]||(SEL[sid]={});
-  const a=pick(la,sel.A),b=pick(lb,sel.B),total=a.price+b.price,thr=Number(S.opt.thr)||0;
-  let bar='';
-  if(thr){
-    const done=total>=thr,pct=Math.min(100,total/thr*100);
-    bar=`<div class="bar${done?' done':''}"><i style="width:${pct}%"></i></div>
-      <div class="barlabel${done?' done':''}">${done?`已達免運門檻 ${fmt(thr)}`:`距離免運門檻 ${fmt(thr)} 還差 ${fmt(thr-total)}`}</div>`;
-  }
-  const side=(slot,list,cur,label)=>{
-    const id=sid+'|'+slot,open=OPEN.has(id)?' open':'';
-    return `<div class="side"><div class="side-t">${esc(label||'商品 '+slot)}</div>${itemMini(cur)}
-      <details class="cmp" data-open="${esc(id)}"${open}><summary>此賣場有 ${list.length} 件，比價</summary>
-      <div class="list">${listRows(slot,sid,list,cur.itemId)}</div></details></div>`;
-  };
-  return `<article class="shop"><div class="shop-h">
-    <div><a class="name" href="https://shopee.tw/shop/${esc(sid)}" target="_blank" rel="noopener">蝦皮賣場 #${esc(sid)}</a><span class="tag">蝦皮</span></div>
-    <div class="total"><b>${fmt(total)}</b><small>${fmt(a.price)} + ${fmt(b.price)}</small></div></div>
-    ${bar}<div class="pair">${side('A',la,a,S.A.label)}${side('B',lb,b,S.B.label)}</div></article>`;
-}
-function render(){
-  ['A','B'].forEach(s=>{
-    const n=S[s].items.length,shops=new Set(S[s].items.map(i=>i.shopId)).size;
-    $('#cnt'+s).textContent=n?`已匯入 ${n} 件・${shops} 個賣場`:'尚未匯入';
-    const kw=S[s].label.trim();
-    $('#open'+s).href='https://shopee.tw/search?keyword='+encodeURIComponent(kw);
-    $('#open'+s).style.visibility=kw?'visible':'hidden';
-  });
-  const fa=filterItems('A'),fb=filterItems('B'),ga=group(fa),gb=group(fb);
-  const both=[],partial=[];
-  ga.forEach((la,sid)=>{ if(gb.has(sid))both.push([sid,la,gb.get(sid)]); else partial.push({sid,side:'A',list:la}) });
-  gb.forEach((lb,sid)=>{ if(!ga.has(sid))partial.push({sid,side:'B',list:lb}) });
+function shopCard(sid,lists,P){
   const thr=Number(S.opt.thr)||0;
-  const tot=r=>pick(r[1],(SEL[r[0]]||{}).A).price+pick(r[2],(SEL[r[0]]||{}).B).price;
-  const sort=S.opt.sort;
-  both.sort((x,y)=>{
-    if(sort==='cnt')return (y[1].length+y[2].length)-(x[1].length+x[2].length)||tot(x)-tot(y);
-    if(sort==='gap'&&thr){
-      const gx=tot(x)-thr,gy=tot(y)-thr;
-      const rx=gx>=0?gx:1e6-gx,ry=gy>=0?gy:1e6-gy; // 已達標者在前（超出越少越前），未達標者殿後（差越少越前）
-      return rx-ry;
+  const chosen=lists.map((l,i)=>l.length?pickItem(l,sid,P[i].id):null);
+  const have=chosen.filter(Boolean),total=have.reduce((s,x)=>s+x.price,0);
+  const full=have.length===P.length;
+  let bar='';
+  if(thr){const done=total>=thr;
+    bar=`<div class="bar${done?' done':''}"><i style="width:${Math.min(100,total/thr*100)}%"></i></div>
+    <div class="barlabel${done?' done':''}">${done?`已達免運門檻 ${fmt(thr)}`:`距離免運門檻 ${fmt(thr)} 還差 ${fmt(thr-total)}`}</div>`}
+  const lines=P.map((p,i)=>{
+    const l=lists[i];
+    if(!l.length)return `<div class="line"><div class="lt">${esc(p.label)}</div><div class="missing">此賣場沒有找到。<a href="https://shopee.tw/shop/${esc(sid)}/search?keyword=${encodeURIComponent(p.label)}" target="_blank" rel="noopener">到賣場內搜尋看看</a></div></div>`;
+    const key=sid+'|'+p.id;
+    return `<div class="line"><div class="lt">${esc(p.label)}</div>${itemMini(chosen[i])}
+      <details class="cmp" data-open="${esc(key)}"${OPEN.has(key)?' open':''}><summary>此賣場有 ${l.length} 件，查看全部與比價</summary>
+      <div class="list">${listRows(sid,p.id,l,chosen[i].itemId)}</div></details></div>`;
+  }).join('');
+  return `<article class="shop${full?' full':''}"><div class="shop-h">
+    <div><a class="name" href="https://shopee.tw/shop/${esc(sid)}" target="_blank" rel="noopener">蝦皮賣場 #${esc(sid)}</a>
+    <span class="badge">${full?`${P.length} 項都有`:`有 ${have.length}/${P.length} 項`}</span></div>
+    <div class="total"><b>${fmt(total)}</b><small>${have.length} 件合計</small></div></div>${bar}${lines}</article>`;
+}
+
+function render(){
+  updateMeta();
+  // 「至少要有」選單
+  const {P,shops}=compute();
+  const sel=$('#min'),cur=S.opt.min;
+  let opts='<option value="all">全部商品</option>';
+  for(let k=P.length-1;k>=2;k--)opts+=`<option value="${k}">${k} 項以上</option>`;
+  if(sel.innerHTML!==opts)sel.innerHTML=opts;
+  sel.value=[...sel.options].some(o=>o.value===cur)?cur:'all';
+  sel.disabled=P.length<3;
+
+  const thr=Number(S.opt.thr)||0,need=P.length<3||S.opt.min==='all'?P.length:Math.min(Number(S.opt.min),P.length);
+  const rows=[];
+  shops.forEach((lists,sid)=>{
+    const cov=lists.filter(l=>l.length).length;
+    if(cov>=need&&cov>=Math.min(2,P.length)){
+      const total=lists.reduce((s,l,i)=>s+(l.length?pickItem(l,sid,P[i].id).price:0),0);
+      rows.push({sid,lists,cov,total,cnt:lists.reduce((s,l)=>s+l.length,0)});
     }
-    return tot(x)-tot(y);
+  });
+  rows.sort((a,b)=>{
+    if(b.cov!==a.cov)return b.cov-a.cov;
+    if(S.opt.sort==='cnt')return b.cnt-a.cnt||a.total-b.total;
+    if(S.opt.sort==='gap'&&thr){const ga=a.total-thr,gb=b.total-thr;return (ga>=0?ga:1e6-ga)-(gb>=0?gb:1e6-gb)}
+    return a.total-b.total;
   });
 
-  const hasData=S.A.items.length&&S.B.items.length;
-  const sum=$('#sum'),res=$('#results'),par=$('#partial');
-  if(!hasData){
-    sum.textContent='';
-    res.innerHTML=`<div class="empty"><b>還沒有資料可以比對。</b><br>A、B 兩邊都匯入商品後，這裡會列出兩樣都有賣的賣場。</div>`;
-    par.innerHTML='';return;
-  }
-  sum.innerHTML=both.length?`找到 <b>${both.length}</b> 個賣場同時賣 A 與 B。`:'';
-  res.innerHTML=both.length?both.map(r=>shopCard(r[0],r[1],r[2])).join(''):
-    `<div class="empty"><b>目前沒有賣場同時有兩樣商品。</b><br>可以放寬篩選、取消「標題必須含關鍵字」、或回蝦皮換頁／換排序再擷取更多結果。下方會列出只有一邊的賣場，可直接到該賣場內搜尋另一樣。</div>`;
-  const shown=partial.slice(0,40);
-  par.innerHTML=partial.length?`<details class="partial" style="margin-top:18px"><summary>只有其中一樣的賣場（${partial.length}）</summary><ul>`+
-    shown.map(p=>{
-      const other=p.side==='A'?'B':'A',kw=S[other].label.trim(),it=p.list[0];
-      const link=kw?`<a href="https://shopee.tw/shop/${esc(p.sid)}/search?keyword=${encodeURIComponent(kw)}" target="_blank" rel="noopener">到此賣場搜尋「${esc(kw)}」</a>`:'';
-      return `<li>賣場 #${esc(p.sid)} 有商品 ${p.side}（最低 ${fmt(it.price)}：${esc(it.title.slice(0,30))}）　${link}</li>`;
-    }).join('')+`</ul></details>`:'';
+  const withData=P.filter(p=>p.items.length).length;
+  const sum=$('#sum'),res=$('#results'),more=$('#more');
+  if(P.length<2){sum.textContent='';res.innerHTML='<div class="empty"><b>先輸入至少兩樣商品。</b><br>輸入後按「開始搜尋」，這裡會列出同時有賣的賣場。</div>';more.innerHTML='';return}
+  if(!withData){sum.textContent='';res.innerHTML='<div class="empty"><b>還沒有搜尋結果。</b><br>按上方「開始搜尋」，擴充功能會自動到蝦皮搜尋並翻頁。</div>';more.innerHTML='';return}
+  const empties=P.filter(p=>!p.items.length).map(p=>`「${esc(p.label)}」`);
+  let s=rows.length?`找到 <b>${rows.length}</b> 個符合的賣場。`:'';
+  if(empties.length)s+=` ${empties.join('、')}還沒有搜尋結果。`;
+  if(S.hidden.length)s+=` 已隱藏 ${S.hidden.length} 件「不是這個」的商品 <button class="linkbtn" id="unhide">全部還原</button>`;
+  sum.innerHTML=s;
+  res.innerHTML=rows.length?rows.slice(0,LIMIT).map(r=>shopCard(r.sid,r.lists,P)).join(''):
+    '<div class="empty"><b>沒有符合條件的賣場。</b><br>可以調低「至少要有」、取消「標題必須包含」、增加搜尋頁數，或換個關鍵字。</div>';
+  more.innerHTML=rows.length>LIMIT?`<button class="btn" id="moreBtn">再顯示更多（還有 ${rows.length-LIMIT} 個）</button>`:'';
 }
 
 /* ---------- 事件 ---------- */
 document.addEventListener('click',e=>{
-  const c=e.target.closest('[data-clear]');
-  if(c){const s=c.dataset.clear;if(S[s].items.length&&!confirm('清空商品 '+s+' 已匯入的資料？'))return;S[s].items=[];save();render();return}
-  const p=e.target.closest('[data-pick]');
-  if(p){(SEL[p.dataset.shop]||(SEL[p.dataset.shop]={}))[p.dataset.pick]=p.dataset.item;
-    document.querySelectorAll('details.cmp[open]').forEach(d=>OPEN.add(d.dataset.open));render();}
+  const t=e.target;
+  const del=t.closest('[data-del]');
+  if(del){S.products=S.products.filter(p=>p.id!==del.dataset.del);save();renderProds();render();return}
+  const pk=t.closest('[data-pick]');
+  if(pk){(SEL[pk.dataset.shop]||(SEL[pk.dataset.shop]={}))[pk.dataset.pid]=pk.dataset.pick;
+    document.querySelectorAll('details.cmp[open]').forEach(d=>OPEN.add(d.dataset.open));render();return}
+  const hd=t.closest('[data-hide]');
+  if(hd){S.hidden.push(hd.dataset.hide);save();document.querySelectorAll('details.cmp[open]').forEach(d=>OPEN.add(d.dataset.open));render();return}
+  if(t.id==='unhide'){S.hidden=[];save();render()}
+  if(t.id==='moreBtn'){LIMIT+=30;render()}
 });
-document.addEventListener('toggle',e=>{
-  const d=e.target;if(d.dataset&&d.dataset.open){d.open?OPEN.add(d.dataset.open):OPEN.delete(d.dataset.open)}
-},true);
+document.addEventListener('toggle',e=>{const d=e.target;if(d.dataset&&d.dataset.open)d.open?OPEN.add(d.dataset.open):OPEN.delete(d.dataset.open)},true);
+$('#prods').addEventListener('input',e=>{
+  const el=e.target.closest('.prod');if(!el||!e.target.matches('[data-label]'))return;
+  const p=prod(el.dataset.id);p.label=e.target.value;save();render();
+});
+$('#addBtn').addEventListener('click',()=>{
+  if(S.products.length>=MAX)return;
+  S.products.push({id:uid(),label:'',items:[]});save();renderProds();
+  const ins=document.querySelectorAll('.prod input');ins[ins.length-1].focus();
+});
+$('#goBtn').addEventListener('click',()=>{
+  const tasks=S.products.filter(p=>p.label.trim()).map(p=>({id:p.id,label:p.label.trim()}));
+  if(tasks.length<2){setStatus('請至少輸入兩樣商品。',true);return}
+  tasks.forEach(t=>{prod(t.id).items=[]});
+  Object.keys(SEL).forEach(k=>delete SEL[k]);LIMIT=30;
+  RUNNING=true;syncBtns();render();
+  setStatus('已開始，會彈出一個小視窗自動搜尋，請不要關閉它（可以縮到旁邊）。');
+  post({type:'search',tasks,pages:Number(S.opt.pages)||3});
+});
+$('#stopBtn').addEventListener('click',()=>{post({type:'cancel'})});
 
-['A','B'].forEach(s=>{
-  const el=$('#label'+s);el.value=S[s].label;
-  el.addEventListener('input',()=>{S[s].label=el.value;save();render()});
-});
-const bind=(id,key,type)=>{
+const bind=(id,key,check)=>{
   const el=$(id);
-  if(type==='check')el.checked=!!S.opt[key];else el.value=S.opt[key]==null?'':S.opt[key];
-  el.addEventListener(type==='check'?'change':'input',()=>{
-    S.opt[key]=type==='check'?el.checked:el.value;save();render();
-  });
+  if(check)el.checked=!!S.opt[key];else el.value=S.opt[key];
+  el.addEventListener(check?'change':'input',()=>{S.opt[key]=check?el.checked:el.value;LIMIT=30;save();render()});
 };
-bind('#thr','thr');bind('#maxA','maxA');bind('#maxB','maxB');bind('#excl','excl');
-bind('#strict','strict','check');bind('#sort','sort');bind('#worker','worker');bind('#pages','pages');
+bind('#thr','thr');bind('#excl','excl');bind('#strict','strict',true);bind('#sort','sort');bind('#min','min');bind('#pages','pages');
 
-$('#pasteBtn').addEventListener('click',()=>{
-  try{
-    const arr=JSON.parse($('#pasteBox').value);
-    const n=addItems($('#pasteSlot').value,Array.isArray(arr)?arr:arr.items);
-    $('#pasteBox').value='';alert('已匯入，新增 '+n+' 件');
-  }catch(err){alert('JSON 格式不正確')}
-});
-
-$('#autoBtn').addEventListener('click',async()=>{
-  const base=(S.opt.worker||'').trim().replace(/\/+$/,''),msg=$('#autoMsg');
-  if(!/^https:\/\//.test(base)){msg.textContent='請先填入 Worker 網址（https://…）。';return}
-  if(!S.A.label.trim()||!S.B.label.trim()){msg.textContent='請先在步驟 1 輸入商品 A 與 B 的名稱。';return}
-  const pages=Math.max(1,Math.min(5,Number(S.opt.pages)||1));
-  try{
-    for(const s of ['A','B']){
-      for(let p=0;p<pages;p++){
-        msg.textContent=`搜尋商品 ${s}（${S[s].label}）第 ${p+1}/${pages} 頁…`;
-        const r=await fetch(`${base}/search?q=${encodeURIComponent(S[s].label.trim())}&page=${p}`);
-        const j=await r.json();
-        if(!r.ok||j.error)throw new Error(j.error||('HTTP '+r.status));
-        addItems(s,j.items);
-        if(!j.items||!j.items.length)break;
-      }
-    }
-    msg.textContent='完成。';
-  }catch(err){msg.textContent='自動搜尋失敗：'+err.message+'。蝦皮可能擋掉了伺服器請求，請改用書籤擷取。'}
-});
-
-if(S.A.items.length||S.B.items.length)$('#howBox').open=false;
-render();
+renderProds();renderExt();render();
 })();
 </script>
 </body>
