@@ -41,6 +41,7 @@ h2{font-size:17px;font-weight:700;margin:30px 0 10px}
 .row{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin:6px 0}
 .row input[type=text],.row input[type=number],.row select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
 .row input[type=number]{width:96px}
+.note{margin:0 0 10px;font-size:13.5px;color:var(--mute)}
 .sum{margin:14px 0 8px;color:var(--mute)}
 .sum b{color:var(--ink)}
 
@@ -91,16 +92,24 @@ footer{margin-top:40px;font-size:12.5px;color:var(--mute)}
   <div id="ext"></div>
 
   <h2>想買哪些商品？</h2>
+  <p class="note">第 1 項請填<b>比較冷門的商品</b>（例：魔芋爽）。系統會先找出賣它的賣場，再到每個賣場裡搜尋其他商品（例：巧克力），所以不會因為大類商品太多而漏掉。</p>
   <div id="prods"></div>
   <div class="actions">
     <button class="btn" id="addBtn">新增商品（最多 6 件）</button>
-    <label>每項搜尋
+    <label>第 1 項搜尋
       <select id="pages">
         <option value="1">1 頁（約 60 件）</option>
-        <option value="2">2 頁（約 120 件）</option>
-        <option value="3">3 頁（約 180 件）</option>
-        <option value="5">5 頁（約 300 件）</option>
-        <option value="8">8 頁（約 480 件）</option>
+        <option value="2">2 頁</option>
+        <option value="3">3 頁</option>
+        <option value="5">5 頁</option>
+        <option value="8">8 頁</option>
+      </select></label>
+    <label>最多檢查
+      <select id="maxShops">
+        <option value="10">10 個賣場</option>
+        <option value="20">20 個賣場</option>
+        <option value="40">40 個賣場</option>
+        <option value="80">80 個賣場</option>
       </select></label>
     <button class="btn primary" id="goBtn">開始搜尋</button>
     <button class="btn" id="stopBtn" hidden>停止</button>
@@ -141,7 +150,7 @@ const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
 const uid=()=>'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
 
 const DEF=()=>({products:[{id:uid(),label:'',items:[]},{id:uid(),label:'',items:[]}],
-  opt:{thr:'',excl:'',strict:false,sort:'total',min:'all',pages:'3'},hidden:[]});
+  opt:{thr:'',excl:'',strict:false,sort:'total',min:'all',pages:'3',maxShops:'20'},hidden:[]});
 let S=DEF();
 try{const r=JSON.parse(localStorage.getItem(KEY)||'null');
   if(r&&Array.isArray(r.products)&&r.products.length){S=Object.assign(DEF(),r);S.opt=Object.assign(DEF().opt,r.opt||{})}}catch(e){}
@@ -157,10 +166,9 @@ window.addEventListener('message',e=>{
   if(e.source!==window)return;
   const d=e.data;if(!d||d.src!=='dualshop-ext')return;
   if(d.type==='pong'){EXT=true;renderExt()}
-  else if(d.type==='progress')setStatus(`正在搜尋「${d.label}」第 ${d.page}/${d.pages} 頁，這項已取得 ${d.count} 件…`);
+  else if(d.type==='progress')setStatus(d.text);
   else if(d.type==='items')addItems(d.id,d.items);
-  else if(d.type==='slotDone'){const p=prod(d.id);setStatus(`「${p?p.label:''}」完成，共 ${d.count} 件`)}
-  else if(d.type==='done'){RUNNING=false;setStatus('全部搜尋完成。');syncBtns()}
+  else if(d.type==='done'){RUNNING=false;setStatus(`搜尋完成，已檢查 ${d.shops} 個賣場。`);syncBtns()}
   else if(d.type==='error'){RUNNING=false;setStatus(d.message,true);syncBtns()}
 });
 let tries=0;(function ping(){post({type:'ping'});if(!EXT&&tries++<8)setTimeout(ping,400)})();
@@ -342,10 +350,11 @@ $('#goBtn').addEventListener('click',()=>{
   const tasks=S.products.filter(p=>p.label.trim()).map(p=>({id:p.id,label:p.label.trim()}));
   if(tasks.length<2){setStatus('請至少輸入兩樣商品。',true);return}
   tasks.forEach(t=>{prod(t.id).items=[]});
+  const maxShops=Number(S.opt.maxShops)||20;
   Object.keys(SEL).forEach(k=>delete SEL[k]);LIMIT=30;
   RUNNING=true;syncBtns();render();
   setStatus('已開始，會彈出一個小視窗自動搜尋，請不要關閉它（可以縮到旁邊）。');
-  post({type:'search',tasks,pages:Number(S.opt.pages)||3});
+  post({type:'search',anchor:tasks[0],others:tasks.slice(1),pages:Number(S.opt.pages)||3,maxShops});
 });
 $('#stopBtn').addEventListener('click',()=>{post({type:'cancel'})});
 
@@ -354,7 +363,7 @@ const bind=(id,key,check)=>{
   if(check)el.checked=!!S.opt[key];else el.value=S.opt[key];
   el.addEventListener(check?'change':'input',()=>{S.opt[key]=check?el.checked:el.value;LIMIT=30;save();render()});
 };
-bind('#thr','thr');bind('#excl','excl');bind('#strict','strict',true);bind('#sort','sort');bind('#min','min');bind('#pages','pages');
+bind('#thr','thr');bind('#excl','excl');bind('#strict','strict',true);bind('#sort','sort');bind('#min','min');bind('#pages','pages');bind('#maxShops','maxShops');
 
 renderProds();renderExt();render();
 })();
