@@ -8,7 +8,7 @@
 
 ## 安裝擴充功能（一次性，Chrome / Edge 電腦版）
 1. 解壓縮 `dualshop-extension.zip`（或直接用 `extension/` 資料夾）。
-2. 開啟 `chrome://extensions`，打開「開發人員模式」。
+2. 開啟 chrome://extensions ，打開「開發人員模式」。
 3. 按「載入未封裝項目」，選那個資料夾。
 4. 重新整理網頁，頂端出現綠色「已連線」即完成。
 
